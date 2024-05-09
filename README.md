@@ -1,1 +1,3 @@
-# Google Translator Clone made in React + TypeScript + Vite
+# Google Translator Clone
+
+Built with React + TS + Vite
