@@ -1,3 +1,3 @@
 # Google Translator Clone
 
-Built with React + TS + Vite
+Built with React + TS + Vite 
