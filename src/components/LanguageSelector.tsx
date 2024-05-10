@@ -5,7 +5,7 @@ import React from 'react'
 
 type Props =
   | { type: SectionType.From, value: FromLanguage, onChange: (language: FromLanguage) => void }
-  | {type: SectionType.To, value: Language, onChange: (language: Language) => void }
+  | { type: SectionType.To, value: Language, onChange: (language: Language) => void }
 
 export const LanguageSelector = ({ onChange, type, value }: Props) => {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
