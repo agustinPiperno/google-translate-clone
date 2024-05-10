@@ -4,6 +4,14 @@ import process from 'process';
 import dotenv from 'dotenv'
 import cors from 'cors';
 
+const LANGUAGE_CODES = {
+  English: 'en-US',
+  Spanish: 'ES',
+  French: 'FR',
+  en: 'en-US',
+  auto: null
+}
+
 dotenv.config()
 
 const authKey = process.env.DEEPL_API_KEY; // Replace with your key
@@ -17,13 +25,11 @@ app.use(express.json()); // for parsing application/json
 
 app.post('/translate', async (req, res) => {
   const { text, fromLanguage, toLanguage } = req.body;
-  
-  let fromLang = fromLanguage
-  if(fromLanguage === 'auto') fromLang = null 
-  if(fromLanguage === 'en') fromLang = 'en-US'
 
-  let toLang = toLanguage
-  if(toLanguage === 'en') toLang = 'en-US';
+  let fromLang = LANGUAGE_CODES[fromLanguage]
+  if(fromLang === 'en-US') fromLang = 'EN'
+
+  let toLang = LANGUAGE_CODES[toLanguage]
 
   try {
     const translationResult = await translator.translateText(
