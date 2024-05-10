@@ -6,11 +6,24 @@ import { AUTO_LANGUAGE } from './constants'
 import { useStore } from './hooks/useStore'
 import { ArrowsIcon } from './components/Icons'
 import { LanguageSelector } from './components/LanguageSelector'
-import { SectionType } from './types.d'
+import { SectionType } from './types'
 import { TextArea } from './components/TextArea'
+import { useEffect } from 'react'
+import { translate } from './services/translate'
 
 function App() {
   const { loading, fromLanguage, toLanguage, fromText, result, interchangeLanguages, setFromLanguage, setToLanguage, setFromText, setResult } = useStore()
+
+  useEffect(() => {
+    if(fromText === '') return
+
+    translate({ fromLanguage, toLanguage, text: fromText})
+      .then(result => {
+        if(result == null) return
+        setResult(result)
+    })
+    .catch((error) => {setResult(error)})
+  }, [fromText])
 
   return (
     <Container fluid>
@@ -22,7 +35,7 @@ function App() {
           <LanguageSelector 
             type={SectionType.From}
             value={fromLanguage}
-            onChange={ setFromLanguage }
+            onChange={setFromLanguage}
           />
           <TextArea
             type={SectionType.From}
@@ -43,7 +56,7 @@ function App() {
           <LanguageSelector 
             type={SectionType.To}
             value={toLanguage}
-            onChange={ setToLanguage }
+            onChange={setToLanguage}
           />
           <TextArea
             loading={loading}

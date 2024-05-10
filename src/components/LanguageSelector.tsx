@@ -1,6 +1,6 @@
 import { Form } from 'react-bootstrap'
 import { SUPPORTED_LANGUAGES } from '../constants'
-import { type Language, type FromLanguage, SectionType } from '../types.d'
+import { type Language, type FromLanguage, SectionType } from '../types'
 import React from 'react'
 
 type Props =
